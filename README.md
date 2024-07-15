@@ -71,7 +71,7 @@ This is a copy from `defaults/main.yml`
 ```yaml
 ---
 # Runner user - user under which is the local runner service running
-runner_user: "{{ lookup('env', 'USER') }}"
+runner_user: "github-runner"
 
 # Directory where the local runner will be installed
 runner_dir: /opt/actions-runner

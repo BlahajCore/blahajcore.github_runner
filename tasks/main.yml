@@ -1,4 +1,9 @@
 ---
+- name: Include install prepare tasks
+  ansible.builtin.include_tasks: prepare-install.yml
+  tags:
+    - install
+
 - name: Include Assert tasks
   ansible.builtin.include_tasks: assert.yml
   tags:
@@ -16,6 +21,12 @@
   when: runner_state|lower == "started" or runner_state|lower == "stopped"
   tags:
     - install
+
+- name: Include uninstall prepare tasks
+  when: reinstall_runner or runner_state|lower == "absent"
+  ansible.builtin.include_tasks: prepare-uninstall.yml
+  tags:
+    - uninstall
 
 - name: Include tasks to uninstall runner
   ansible.builtin.include_tasks: uninstall_runner.yml
